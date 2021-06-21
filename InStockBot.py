@@ -46,11 +46,11 @@ def publish(item_name, addURL):
 	arn = #ARN Code from AWS here
 	sns_client = boto3.client(
 		'sns',
-    # Optional steps to define AWS info
+   	 	# Optional steps to define AWS info
 		#region_name= 'eu-central-1' etc-
-    # If your AWS environment isn't set up in your IDE - you'll need to add:
-    #access_key_id=<AWS Access Key>
-    #aws_secret_access_key=<AWS Secret Access Key>
+    		# If your AWS environment isn't set up in your IDE - you'll need to add:
+    		#access_key_id=<AWS Access Key>
+    		#aws_secret_access_key=<AWS Secret Access Key>
 	)
 
 	response = sns_client.publish(TopicArn=arn, Message=item_name + ' is in stock! Buy here ' + addURL)
