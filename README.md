@@ -4,5 +4,7 @@ This is a quick python script that uses the Best Buy API to check stock of speci
 API calls are limited to once every 5 seconds per the Developer agreement.
 
 Requires:
-AWS Account (optional for SNS & to run on EC2)
-Best Buy Developer Account (required for the API)
+
+- AWS Account (optional for SNS & to run on EC2)
+
+- Best Buy Developer Account (required for the API)
