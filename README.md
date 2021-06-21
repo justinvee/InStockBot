@@ -9,3 +9,6 @@ Requires:
 
 - Best Buy Developer Account (required for the API)
   -   Best Buy limits access to their API, so you either have to have a company account to grab a key, or you can sign up using a non-free email and get a temporary key until they approve or deny your request
+
+
+Ps. I'm not a developer, so this may not be the most efficient way of doing this
