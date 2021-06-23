@@ -25,9 +25,10 @@ Requires:
 
 - AWS Account (optional for SNS)
 
-More to come... planning on having a similar check for Best Buy using Selenium (due to API key difficulties) and maybe some other sites.
+More to come... planning on having a similar check for Best Buy using Selenium (due to API key difficulties) and maybe some other sites. Plus maybe seeing if there is a way to set up notifications that doesn't require SMS & uses push instead.
 
 Ps. I'm not a developer, so this may not be (ok, *is definitely not*) the most efficient way of doing this
+
 Pps. I had a lot of help from posts and YouTube videos to make all these, so shout out to those great folks:
 
 [Be A Better Dev - Scraping Bestbuy's Website with Python and AWS](https://www.youtube.com/watch?v=6ixBJZ2vnYk)
