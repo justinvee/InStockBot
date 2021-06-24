@@ -15,7 +15,7 @@ Requires:
 
 - AWS Account (optional for SNS & to run on EC2)
 
-## [Amazon PS5 Check](https://github.com/justinvee/InStockBot/blob/main/BestBuy_API_InStockBot.py) 
+## [Amazon PS5 Check](https://github.com/justinvee/InStockBot/blob/main/amazon_ps5_check.py) 
 
 This is a Selenium script that checks the Amazon page for a PS5 (disk version, but you can update to diskless if you'd like) every 5-20 seconds. When it sees that the page shows it as no longer unavailable - it gets the price, adds it to cart, and sends a notification through SNS to check out with a checkout link.
 
