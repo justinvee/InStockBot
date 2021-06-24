@@ -25,23 +25,29 @@ def main():
     attempt = 0
     InStock = False
     while not InStock:
-        try:
-            if (driver.find_element_by_xpath("""/html/body/div[2]/div[2]/div[7]/div[6]/div[4]/div[18]/div[1]/span""").text == "Currently unavailable."):
-                # Checks if the page shows it as currently unavailable
-                attempt += 1
-                print("Not available. Try number: ", attempt)
-                # Waits a random amount of time between 5 and 20 seconds to refresh
-                wait_time = random.randrange(5, 20)
-                time.sleep(wait_time)
-                driver.refresh()
-            else:
-                InStock = True
-        except:
-            # If available, gets the price, adds the PS5 to the cart, & passes the data through to SNS for notification
-            price = driver.find_element_by_xpath("""//*[@id="priceblock_ourprice"]""").text
-            driver.find_element_by_xpath("""//*[@id="add-to-cart-button"]""").click()
-            cartLink = "https://www.amazon.com/gp/cart/view.html?ref_=nav_cart"
-            publish(price, cartLink)
+	# Runs a check if there is any error on loading the site
+	if (driver.find_elements_by_xpath("""//*[@id="main-frame-error"]""")):
+            print("Errored out. Restarting in 20s")
+            time.sleep(20)
+            driver.refresh()
+        else:
+		try:
+		    if (driver.find_element_by_xpath("""/html/body/div[2]/div[2]/div[7]/div[6]/div[4]/div[18]/div[1]/span""").text == "Currently unavailable."):
+			# Checks if the page shows it as currently unavailable
+			attempt += 1
+			print("Not available. Try number: ", attempt)
+			# Waits a random amount of time between 5 and 20 seconds to refresh
+			wait_time = random.randrange(5, 20)
+			time.sleep(wait_time)
+			driver.refresh()
+		    else:
+			InStock = True
+		except:
+		    # If available, gets the price, adds the PS5 to the cart, & passes the data through to SNS for notification
+		    price = driver.find_element_by_xpath("""//*[@id="priceblock_ourprice"]""").text
+		    driver.find_element_by_xpath("""//*[@id="add-to-cart-button"]""").click()
+		    cartLink = "https://www.amazon.com/gp/cart/view.html?ref_=nav_cart"
+		    publish(price, cartLink)
 
 # Publishes a notification using AWS SNS with the pass-through from the previous function
 def publish(price, cartLink):
