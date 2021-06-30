@@ -25,6 +25,16 @@ Requires:
 
 - AWS Account (optional for SNS)
 
+
+## [Skroutz PS5 Price Monitoring](https://github.com/justinvee/InStockBot/blob/main/skroutz_ps5.py)
+
+Similar to the Amazon PS5 check above, this checks the price for a PS5 on Skroutz (Greek retail/marketplace) and alerts if the price goes below a set price through AWS SNS. Need more work on this one & to add Discord notifications.
+Requires:
+- AWS Account (optional for SNS)
+
+
+## Other
+
 More to come... planning on having a similar check for Best Buy using Selenium (due to API key difficulties) and maybe some other sites. Plus maybe seeing if there is a way to set up notifications that doesn't require SMS & uses push instead.
 
 Ps. I'm not a developer, so this may not be (ok, *is definitely not*) the most efficient way of doing this
