@@ -30,41 +30,37 @@ def main():
             attempt += 1
             print("Not available. Try number: ", attempt)
             # Waits a random amount of time between 5 and 20 seconds to refresh
-            wait_time = random.randrange(5, 20)
-            time.sleep(wait_time)
+            time.sleep(random.randrange(5, 20))
             driver.refresh()
-        else:
-            InStock = True
-            continue
-    else:
-        # This section checks if there is availability for the PS5, but only through the "See All Buying Options" - usually used items or scalped ones & gets the lowest seller & price
-        if  bool(driver.find_element_by_xpath("""//*[@id="buybox-see-all-buying-choices"]/span/a""")) == True:
-            ASIN = driver.find_element_by_xpath(
-                """/html/body/div[1]/div[2]/div[7]/div[23]/div/div/div/div[1]/div/div/table/tbody/tr[1]/td""").text
+        elif bool(driver.find_element_by_xpath("""//*[@id="buybox-see-all-buying-choices"]/span/a""")) == True:
+            # This section is checking if it's available through the "See All Buying Options" box & displays the price, but it doesn't notify.
             driver.find_element_by_xpath("""//*[@id="buybox-see-all-buying-choices"]/span/a""").click()
             time.sleep(5)
             type = driver.find_element_by_xpath("""//*[@id="aod-offer-heading"]/h5""").text
             seller = driver.find_element_by_xpath("""//*[@id="aod-offer-shipsFrom"]/div/div/div[2]/span""").text
             price = driver.find_element_by_xpath("""//*[@id="aod-price-1"]/span/span[2]/span[2]""").text
             addToCart = str("https://www.amazon.com/PlayStation-5-Console/dp/B08FC5L3RG/")
-            discord_pub(seller, type, price, addToCart)
-            print("Waiting 30min to check again.")
-            time.sleep(1800)
-            main()
+            driver.refresh()
+            print("Found, but not Amazon. Lowest price is: $" + price + ". Trying again.")
+            time.sleep(random.randrange(5, 20))
         else:
-            # This section checks for the Amazon selling option & sends the information for that (if "See All Buying Options" doesn't exist)
-            price = driver.find_element_by_xpath("""//*[@id="priceblock_ourprice"]""").text
-            driver.find_element_by_xpath("""//*[@id="add-to-cart-button"]""").click()
-            ASIN = driver.find_element_by_xpath(
-                """/html/body/div[1]/div[2]/div[7]/div[23]/div/div/div/div[1]/div/div/table/tbody/tr[1]/td""")
-            addToCart = ("https://www.amazon.com/gp/cart/view.html?ref_=nav_cart")
-            seller = "Amazon"
-            type = "New"
-            publish(price, addToCart)
-            discord_pub(seller, type, price, addToCart)
-            print("Waiting 30min to check again.")
-            time.sleep(1800)
-            main()
+            InStock = True
+            continue
+    else:
+        # This section alerts through notifications when an "Our Price" appears on the Amazon PS5 page. This is a proxy for a real sale from Amazon at MSRP.
+        price = driver.find_element_by_xpath("""//*[@id="priceblock_ourprice"]""").text
+        driver.find_element_by_xpath("""//*[@id="add-to-cart-button"]""").click()
+        ASIN = driver.find_element_by_xpath(
+            """/html/body/div[1]/div[2]/div[7]/div[23]/div/div/div/div[1]/div/div/table/tbody/tr[1]/td""")
+        addToCart = ("https://www.amazon.com/gp/cart/view.html?ref_=nav_cart")
+        seller = "Amazon"
+        type = "New"
+        publish(price, addToCart)
+        discord_pub(seller, type, price, addToCart)
+        print("Waiting 30min to check again.")
+        time.sleep(1800)
+        driver.refresh()
+        main()
 
 
 # Publishes a notification using AWS SNS with the pass-through from the previous function
