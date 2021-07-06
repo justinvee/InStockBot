@@ -16,7 +16,7 @@ headers = {
     'sec-fetch-site': 'same-origin',
     'sec-fetch-mode': 'cors',
     'sec-fetch-dest': 'empty',
-    'accept-language': 'en-GB,en;q=0.9'
+    'accept-language': 'el-GR,en;q=0.9'
 }
 
 # Choose the price you want to be alerted when the item goes lower. MSRP in Greece is 499,99 or 399,99.
