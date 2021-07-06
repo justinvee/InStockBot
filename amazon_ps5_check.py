@@ -32,7 +32,7 @@ def main():
             # Waits a random amount of time between 5 and 20 seconds to refresh
             time.sleep(random.randrange(5, 20))
             driver.refresh()
-        elif bool(driver.find_element_by_xpath("""//*[@id="buybox-see-all-buying-choices"]/span/a""")) == True:
+        elif bool(driver.find_elements_by_xpath("""//*[@id="buybox-see-all-buying-choices"]/span/a""")) == True:
             # This section is checking if it's available through the "See All Buying Options" box & displays the price, but it doesn't notify.
             driver.find_element_by_xpath("""//*[@id="buybox-see-all-buying-choices"]/span/a""").click()
             time.sleep(5)
