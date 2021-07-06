@@ -43,6 +43,7 @@ def main():
         get_price = price[1]
     else:
         print("Διαλέξεις disk η diskless παρακαλώ.")
+        exit()
 
     while get_price > want_price:
         attempt += 1
